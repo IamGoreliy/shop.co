@@ -11,6 +11,13 @@ import {CommentsForOurClients} from "@/app/component/homePageComponent/CommentsF
 import {animationSection} from "@/utils/sectionAnimation";
 
 
+const smoothScrolling = () => {
+    window.scrollBy({
+        top: 10,
+        left: 0,
+        behavior: "smooth",
+    })
+}
 
 export default function Home() {
     const positionScrollY = useContext(PositionScrollYContext);
@@ -27,11 +34,13 @@ export default function Home() {
     const sectionFindStyle = useRef();
     const sectionComments = useRef();
 
-    console.log('hi');
     
 
 
     useEffect(() => {
+        if (!positionScrollY) {
+            smoothScrolling();
+        }
         animationSection(
             positionScrollY,
             positionYSectionOnSale,
