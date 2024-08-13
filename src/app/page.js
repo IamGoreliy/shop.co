@@ -26,6 +26,8 @@ export default function Home() {
     const sectionBestsellers = useRef();
     const sectionFindStyle = useRef();
     const sectionComments = useRef();
+
+    console.log('hi');
     
 
 
