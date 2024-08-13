@@ -1,95 +1,163 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import {Box, Container} from "@mui/material";
+import {HeroTitle} from "@/app/component/homePageComponent/HeroTitle";
+import {Ticker} from "@/app/component/homePageComponent/Ticker";
+import {SectionMarketplace} from "@/app/component/homePageComponent/SectionMarketplace";
+import {dataOnSale, bestsellers} from "@/app/component/homePageComponent/dataForMarketplace";
+import {useContext, useEffect, useRef, useState} from "react";
+import {PositionScrollYContext} from "@/app/template";
+import {FindStyles} from "@/app/component/homePageComponent/FindStyles";
+import {CommentsForOurClients} from "@/app/component/homePageComponent/CommentsForOurClients";
+import {animationSection} from "@/utils/sectionAnimation";
+
+
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    const positionScrollY = useContext(PositionScrollYContext);
+    const [showSectionOnSale, setShowSectionOnSale] = useState(false);
+    const [showSectionBestsellers, setShowSectionBestsellers] = useState(false);
+    const [showSectionFindStyle, setShowSectionFindStyle] = useState(false);
+    const [showSectionComments, setShowSectionComments] = useState(false);
+    const [positionYSectionFindStyle, setPositionYSectionFindStyle] = useState(null);
+    const [positionYSectionComments, setPositionYSectionComments] = useState(null);
+    const [positionYSectionOnSale, setPositionYSectionOnSale] = useState(null);
+    const [positionYSectionBestsellers, setPositionYSectionBestsellers] = useState(null);
+    const sectionOnSale = useRef();
+    const sectionBestsellers = useRef();
+    const sectionFindStyle = useRef();
+    const sectionComments = useRef();
+    
+
+
+    useEffect(() => {
+        animationSection(
+            positionScrollY,
+            positionYSectionOnSale,
+            positionYSectionBestsellers,
+            positionYSectionFindStyle,
+            positionYSectionComments,
+            setPositionYSectionOnSale,
+            setPositionYSectionBestsellers,
+            setPositionYSectionFindStyle,
+            setPositionYSectionComments,
+            setShowSectionOnSale,
+            setShowSectionBestsellers,
+            setShowSectionFindStyle,
+            setShowSectionComments,
+            sectionOnSale,
+            sectionBestsellers,
+            sectionFindStyle,
+            sectionComments,
+        )
+    }, [positionScrollY]);
+
+    return (
+      <Box>
+          <Box
+            sx={{
+                backgroundColor: '#F0F0F0',
+                width: '100%',
+            }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+              <Container
+                maxWidth={'1300px'}
+                sx={{
+                    maxWidth: '1300px',
+                }}
+              >
+                <HeroTitle/>
+              </Container>
+          </Box>
+          <Ticker/>
+          <Container
+            maxWidth={'1300px'}
+            sx={{
+                maxWidth: '1300px',
+            }}
+          >
+              <Box
+                ref={sectionOnSale}
+                sx={{
+                    position: 'relative'
+                }}
+              >
+                  <Box
+                    sx={{
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+                        opacity: showSectionOnSale ? 1 : 0,
+                        width: '100%',
+                        marginTop: showSectionOnSale ? '120px' : '150px',
+                        transition: 'opacity 700ms linear, transform 700ms linear, margin-top 700ms linear',
+                    }}
+                  >
+                      <SectionMarketplace
+                          goods={dataOnSale}
+                          title={'EM PROMOÇÃO'}
+                          anchor={'onSale'}
+                      />
+                  </Box>
+              </Box>
+              <Box
+                  ref={sectionBestsellers}
+                  sx={{
+                      position: 'relative'
+                  }}
+              >
+                  <Box
+                      sx={{
+                          opacity: showSectionBestsellers ? 1 : 0,
+                          width: '100%',
+                          marginTop: showSectionBestsellers ? '120px' : '150px',
+                          transition: 'opacity 700ms linear, transform 700ms linear, margin-top 700ms linear',
+                      }}
+                  >
+                      <SectionMarketplace
+                          goods={bestsellers}
+                          title={'MAIS VENDIDOS'}
+                          positionScroll={positionScrollY}
+                          anchor={'bestsellers'}
+                      />
+                  </Box>
+              </Box>
+              <Box
+                  ref={sectionFindStyle}
+                  sx={{
+                      position: 'relative'
+                  }}
+              >
+                  <Box
+                      sx={{
+                          opacity: showSectionFindStyle ? 1 : 0,
+                          width: '100%',
+                          marginTop: showSectionFindStyle ? '120px' : '150px',
+                          transition: 'opacity 700ms linear, transform 700ms linear, margin-top 700ms linear',
+                      }}
+                  >
+                      <FindStyles/>
+                  </Box>
+              </Box>
+              <Box
+                  ref={sectionComments}
+                  sx={{
+                      position: 'relative'
+                  }}
+              >
+                  <Box
+                      sx={{
+                          opacity: showSectionComments ? 1 : 0,
+                          width: '100%',
+                          marginTop: showSectionComments ? '120px' : '150px',
+                          transition: 'opacity 700ms linear, transform 700ms linear, margin-top 700ms linear',
+                      }}
+                  >
+                      <CommentsForOurClients/>
+                  </Box>
+              </Box>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          </Container>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+      </Box>
+    )
+};
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
-}
