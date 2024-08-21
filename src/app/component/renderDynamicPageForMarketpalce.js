@@ -40,8 +40,8 @@ export const RenderDynamicPageForMarketplace = ({dataProduct}) => {
         <Box
             sx={{
                 display: 'flex',
-                flexDirection: {xs: 'column', md: 'row'},
-                justifyContent: 'space-evenly',
+                flexDirection: {xs: 'column', lg: 'row'},
+                justifyContent: 'space-between',
                 alignItems: 'center',
             }}
         >
@@ -243,6 +243,7 @@ export const RenderDynamicPageForMarketplace = ({dataProduct}) => {
                                 columnGap: '20px',
                                 borderBottom: '1px solid #F0F0F0',
                                 paddingBottom: '20px',
+                                rowGap: '20px',
                             }}
                         >
                             {data?.productSize?.map((ele, index) => {

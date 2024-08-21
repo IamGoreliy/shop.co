@@ -27,7 +27,7 @@ export const HeroTitle = () => {
                 display: 'flex',
                 flexDirection: {xs: 'column', md: 'row'},
                 alignItems: 'center',
-                paddingTop: {xs: '40px', md: 'unset'}
+                paddingTop: {xs: '40px', md: '40px'}
 
             }}
         >

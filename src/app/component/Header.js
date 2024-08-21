@@ -57,7 +57,7 @@ export const Header = () => {
                             sx={{
                                 listStyle: 'none',
                                 padding: 0,
-                                display: {xs: 'none', md: 'flex'},
+                                display: {xs: 'none', lg: 'flex'},
                                 columnGap: '40px',
                             }}
                         >
@@ -126,7 +126,7 @@ export const Header = () => {
                     </Box>
                     <Box
                         sx={{
-                            display: {xs: 'block', md: 'none'},
+                            display: {xs: 'block', lg: 'none'},
                         }}
                     >
                         <Button
@@ -216,9 +216,9 @@ export const Header = () => {
             </Box>
             <Box
                 sx={{
-                    display: {xs: isOpenMenuNav ? 'block' : 'block', md: 'none'},
+                    display: {xs: isOpenMenuNav ? 'block' : 'block', lg: 'none'},
                     width: '100%',
-                    height: {xs: isOpenMenuNav ? '300px' : '0px', md: '0px'},
+                    height: {xs: isOpenMenuNav ? '300px' : '0px', lg: '0px'},
                     backgroundColor: 'white',
                     transition: 'height 500ms linear',
                     overflow: 'hidden',
